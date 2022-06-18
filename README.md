@@ -11,6 +11,12 @@ This is a [WebDriverIO](https://webdriver.io/) project. Resorting to this framew
 ```console
  npm install
 ```
+
+2- Run WebdriverIO tests:
+
+```console
+ npm run test
+```
 <br>
 
 ### Author information
