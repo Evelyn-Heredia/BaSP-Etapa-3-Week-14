@@ -17,7 +17,6 @@ class LoginPage {
     get logoImg() {
         return $('.login_logo');
     }
-
     get backpackImg() {
         return $('#item_4_img_link > img');
     }
@@ -28,7 +27,6 @@ class LoginPage {
     async setPassword(password) {
         await this.inputPassword.setValue(password);
     }
-
     async login(username, password) {
         await this.setUsername(username);
         await this.setPassword(password);

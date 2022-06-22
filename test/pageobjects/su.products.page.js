@@ -1,4 +1,4 @@
-class StandardUser {
+class ProductsPage {
     get hambMenu() {
         return $('#react-burger-menu-btn');
     }
@@ -90,4 +90,4 @@ class StandardUser {
     }
 }
 
-export default new StandardUser();
+export default new ProductsPage();
