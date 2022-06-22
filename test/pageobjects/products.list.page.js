@@ -9,7 +9,7 @@ class ProductsPage {
         return $$('#inventory_sidebar_link');
     }
     get wrapMenuLogout() {
-        return $$('#logout_sidebar_link');
+        return $('#logout_sidebar_link');
     }
     get closeWrapMenu() {
         return $('#react-burger-cross-btn');

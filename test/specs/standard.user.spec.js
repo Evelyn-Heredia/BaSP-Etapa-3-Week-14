@@ -278,13 +278,17 @@ describe('Standard user path',() => {
         await expect(browser).toHaveUrl('https://www.saucedemo.com/inventory.html');
     });
 
-    it('Logout option should redirect to login page', async () => {
+    it('Back Home button should redirect to products list tab', async () => {
         await expect(ProductsPage.hambMenu).toBeDisplayed();
         await expect(ProductsPage.hambMenu).toBeClickable();
+    });
+
+    it('Logout option should redirect to login page', async () => {
         await ProductsPage.hambMenu.click();
         await expect(ProductsPage.wrapMenuItems).toBeClickable();
         await expect(ProductsPage.wrapMenuLogout).toBeDisplayed();
         await expect(ProductsPage.wrapMenuLogout).toBeClickable();
+        await browser.pause(800);
         await ProductsPage.wrapMenuLogout.click();
     });
 });
