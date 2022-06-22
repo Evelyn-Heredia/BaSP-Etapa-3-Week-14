@@ -139,11 +139,6 @@ describe('Standard user path',() => {
 
     it('Inventory page should contain product information.', async () => {
         await ProductInventory.productPage(ProductsPage.backpackImg);
-        /*await ProductInventory.productPage(ProductsPage.bikeLightImg);
-        await ProductInventory.productPage(ProductsPage.tShirtImg);
-        await ProductInventory.productPage(ProductsPage.jacketImg);
-        await ProductInventory.productPage(ProductsPage.babyBodysuitImg);
-        await ProductInventory.productPage(ProductsPage.redTshirtImg);*/
     });
 
     it('Add to cart button should changed into remove when clicked', async () => {
@@ -278,7 +273,7 @@ describe('Standard user path',() => {
         await expect(browser).toHaveUrl('https://www.saucedemo.com/inventory.html');
     });
 
-    it('Back Home button should redirect to products list tab', async () => {
+    it('Hamburger menu should be displayed', async () => {
         await expect(ProductsPage.hambMenu).toBeDisplayed();
         await expect(ProductsPage.hambMenu).toBeClickable();
     });
