@@ -8,6 +8,9 @@ class ProductsPage {
     get wrapMenuItems() {
         return $$('#inventory_sidebar_link');
     }
+    get wrapMenuLogout() {
+        return $$('#logout_sidebar_link');
+    }
     get closeWrapMenu() {
         return $('#react-burger-cross-btn');
     }
@@ -78,10 +81,32 @@ class ProductsPage {
         return $('#page_wrapper > footer > img');
     }
 
+    async productsImg(product,attribute, value) {
+        await expect(product).toHaveAttrContaining(attribute, value);
+    }
     async seeProduct(product,url) {
         await expect(product).toBeDisplayed();
         await product.click();
         await expect(browser).toHaveUrl(url);
+        await this.backToProductsBtn.click();
+    }
+    async inventoryImgs(product,url) {
+        await expect(product).toBeClickable();
+        await product.click();
+        await expect(browser).toHaveUrl(url);
+        await expect(this.hambMenu).toBeDisplayed();
+        await expect(this.hambMenu).toBeClickable();
+        await expect(this.logoImg).toBeDisplayed();
+        await expect(this.cartImg).toBeDisplayed();
+        await expect(this.cartImg).toBeClickable();
+        await expect(this.twitterImg).toBeDisplayed();
+        await expect(this.twitterImg).toBeClickable();
+        await expect(this.facebookImg).toBeDisplayed();
+        await expect(this.facebookImg).toBeClickable();
+        await expect(this.linkedinImg).toBeDisplayed();
+        await expect(this.linkedinImg).toBeClickable();
+        await expect(this.footerBotImg).toBeDisplayed();
+        await expect(this.footerCopyright).toBeDisplayed();
         await this.backToProductsBtn.click();
     }
     async socialMediaIcons(icon) {
