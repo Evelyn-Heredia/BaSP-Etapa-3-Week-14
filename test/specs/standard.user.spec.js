@@ -1,7 +1,7 @@
 import LoginPage from '../pageobjects/login.page';
 import StandardUser from '../pageobjects/standard.user';
 
-describe('Standard user errors',() => {
+describe('Standard user path',() => {
     beforeAll('Open browser', ()=> {
         browser.url('https://www.saucedemo.com/');
     });
@@ -39,8 +39,60 @@ describe('Standard user errors',() => {
         await expect(LoginPage.errorContainer).toHaveText('Epic sadface: Username and password do not match any user in this service');
     });
 
-    it('Successful login', async () => {
+    it('Successful login redirects to products tab', async () => {
         await LoginPage.login('standard_user', 'secret_sauce');
+    });
+
+    it('Hamburger menu should be displayed and clickable', async () => {
+        await expect(StandardUser.hambMenu).toBeDisplayed();
+        await expect(StandardUser.hambMenu).toBeClickable();
+    });
+
+    it('Hamburger menu should display a list', async () => {
+        await StandardUser.hambMenu.click();
+        await expect(StandardUser.wrapMenu).toHaveChildren(4);
+    });
+
+    it('Menu list items should be clickable', async () => {
+        await expect(StandardUser.wrapMenuItems).toBeClickable();
+    });
+
+    it('Red cross should close menu', async () => {
+        await expect(StandardUser.closeWrapMenu).toBeDisplayed();
+        await expect(StandardUser.closeWrapMenu).toBeClickable();
+        await StandardUser.closeWrapMenu.click();
+        await expect(StandardUser.closeWrapMenu).not.toBeDisplayed();
+    });
+
+    it('App logo should be displayed', async () => {
+        await expect(StandardUser.logoImg).toBeDisplayed();
+    });
+
+    it('Cart image should be displayed and clickable', async () => {
+        await expect(StandardUser.cartImg).toBeDisplayed();
+        await expect(StandardUser.cartImg).toBeClickable();
+    });
+
+    it('Page title should be displayed', async () => {
+        await expect(StandardUser.pageTitle).toHaveText('PRODUCTS');
+    });
+
+    it('Bot head image should be displayed', async () => {
+        await expect(StandardUser.botHeadImg).toBeDisplayed();
+    });
+
+    it('Filter should be clickable', async () => {
+        await expect(StandardUser.productFilter).toBeClickable();
+    });
+
+    it('Filter should display options', async () => {
+        await StandardUser.productFilter.click();
+        await expect(StandardUser.productFilter).toHaveChildren(4);
+    });
+
+    it('Filter options should be clickable', async () => {
+        await StandardUser.productFilter.click();
+        await expect(StandardUser.productFilter).toBeClickable();
     });
 
     it('Backpack image should be displayed', async () => {
@@ -65,5 +117,58 @@ describe('Standard user errors',() => {
 
     it('Red T-shirt image should be displayed', async () => {
         await expect(StandardUser.redTshirtImg).toHaveAttrContaining('src', '/static/media/red-tatt-1200x1500.e32b4ef9.jpg');
+    });
+
+    it('Products price should be displayed', async () => {
+        await expect(StandardUser.productsPrice).toHaveAttrContaining('class','inventory_item_price');
+        await expect(StandardUser.productsPrice).toHaveTextContaining('$');
+    });
+
+    it('Add to cart button should be displayed', async () => {
+        await expect(StandardUser.inventoryContainer).toHaveTextContaining('ADD TO CART');
+    });
+
+    it('A new tab should be displayed when clicking a product image', async () => {
+        await StandardUser.seeProduct(StandardUser.backpackImg, 'https://www.saucedemo.com/inventory-item.html?id=4');
+        await expect(StandardUser.hambMenu).toBeDisplayed;
+        await StandardUser.seeProduct(StandardUser.bikeLightImg, 'https://www.saucedemo.com/inventory-item.html?id=0');
+        await StandardUser.seeProduct(StandardUser.tShirtImg, 'https://www.saucedemo.com/inventory-item.html?id=1');
+        await StandardUser.seeProduct(StandardUser.jacketImg, 'https://www.saucedemo.com/inventory-item.html?id=5');
+        await StandardUser.seeProduct(StandardUser.babyBodysuitImg, 'https://www.saucedemo.com/inventory-item.html?id=2');
+        await StandardUser.seeProduct(StandardUser.redTshirtImg, 'https://www.saucedemo.com/inventory-item.html?id=3');
+    });
+
+    it('Add to cart button should changed into remove when clicked', async () => {
+        await expect(StandardUser.addBtn).toBeDisplayed();
+        await StandardUser.addBtn.click();
+        await expect(StandardUser.removeBtn).toBeDisplayed();
+        await expect(StandardUser.removeBtn).toHaveText('REMOVE');
+    });
+
+    it('Remove button should changed into add to cart when clicked', async () => {
+        await expect(StandardUser.removeBtn).toBeDisplayed();
+        await StandardUser.removeBtn.click();
+        await expect(StandardUser.addBtn).toBeDisplayed();
+        await expect(StandardUser.addBtn).toHaveText('ADD TO CART');
+    });
+
+    it('Footer should be displayed', async () => {
+        await expect(StandardUser.productsFooter).toBeDisplayed();
+    });
+
+    it('Social media icons should be displayed and clickable', async () => {
+        await StandardUser.socialMediaIcons(StandardUser.twitterImg);
+        await StandardUser.socialMediaIcons(StandardUser.facebookImg);
+        await StandardUser.socialMediaIcons(StandardUser.linkedinImg);
+
+    });
+
+    it('Footer copyright should be displayed', async () => {
+        await expect(StandardUser.footerCopyright).toBeDisplayed();
+        await expect(StandardUser.footerCopyright).toHaveText('© 2022 Sauce Labs. All Rights Reserved. Terms of Service | Privacy Policy');
+    });
+
+    it('Footer bot image should be displayed', async () => {
+        await expect(StandardUser.footerBotImg).toBeDisplayed();
     });
 });
